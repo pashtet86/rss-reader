@@ -1,0 +1,20 @@
+.container {
+  width: 100%;
+}
+
+.app-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.app-sidebar {
+  width: 20vw;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.app-sidebar__container {
+  position: relative;
+  flex-grow: 1;
+}
