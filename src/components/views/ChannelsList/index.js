@@ -6,17 +6,12 @@ import * as actions from '../../../store/actions/RssListActions';
 import ChannelItem from './ChannelItem';
 
 export class rssChannelsPage extends React.Component {
-  changeRssChannel = (channel) => {
-    this.props.actions.setRssChannel(channel);
-  }
-
   render() {
     return (
       <div className="channels-list">
         {this.props.rssChannels.map((channel) => (
           <ChannelItem
             key={channel.name}
-            onChoose={this.changeRssChannel}
             channel={channel}
           />
         ))}

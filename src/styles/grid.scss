@@ -9,12 +9,17 @@
 }
 
 .app-sidebar {
-  width: 20vw;
-  min-width: 300px;
+  width: 15vw;
+  max-height: 100vh;
+  overflow: auto;
+  flex-shrink: 0;
+  min-width: 200px;
   max-width: 600px;
 }
 
-.app-sidebar__container {
+.app-body {
   position: relative;
   flex-grow: 1;
+  overflow: auto;
+  max-height: 100vh;
 }

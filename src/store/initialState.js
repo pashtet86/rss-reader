@@ -1,5 +1,12 @@
 export default {
+  core: {
+    notification: {
+      type: 'success',
+      message: ''
+    },
+  },
   rssChannels:{
+    isFetching: true,
     selectedChannel: null,
     channelData: {
       items: [],
