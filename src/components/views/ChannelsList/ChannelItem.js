@@ -46,7 +46,7 @@ class ChannelItem extends React.Component {
 ChannelItem.propTypes = {
   actions: object.isRequired,
   channel: object.isRequired,
-  onChoose: func.isRequired,
+  // onChoose: func.isRequired,
   rssChannels: array.isRequired,
 };
 
