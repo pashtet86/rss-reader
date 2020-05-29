@@ -1,5 +1,5 @@
 import React from 'react';
-import { object, func, array } from 'prop-types';
+import { object, array } from 'prop-types';
 import {connect} from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -23,19 +23,20 @@ class ChannelItem extends React.Component {
   }
 
   render() {
+    const { handleRssItemClick } = this;
+    const { channel } = this.props;
+
     return (
-      <Card onClick={this.handleRssItemClick} classes={{ root: 'my-class-name' }}>
+      <Card onClick={handleRssItemClick} classes={{ root: 'active' }}>
         <CardActionArea>
           <CardMedia
             component="div"
-            image={
-              require(`public/images/${this.props.channel.image}`)
-            }
+            image={`/${channel.image}`}
             title="Contemplative Reptile"
           />
 
           <CardContent>
-            {this.props.channel.name}
+            {channel.name}
           </CardContent>
 
         </CardActionArea>
@@ -46,7 +47,6 @@ class ChannelItem extends React.Component {
 ChannelItem.propTypes = {
   actions: object.isRequired,
   channel: object.isRequired,
-  // onChoose: func.isRequired,
   rssChannels: array.isRequired,
 };
 

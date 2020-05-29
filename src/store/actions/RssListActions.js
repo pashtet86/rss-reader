@@ -3,7 +3,7 @@ import rssParser from 'rss-parser';
 
 export function setRssChannel(channel) {
   return function (dispatch) {
-    console.log(channel);
+    // console.log(channel);
 
     return dispatch({
       type: types.SAVE_RSS_LIST,

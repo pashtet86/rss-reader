@@ -11,7 +11,7 @@ export class rssChannelsPage extends React.Component {
       <div className="channels-list">
         {this.props.rssChannels.map((channel) => (
           <ChannelItem
-            key={channel.name}
+            key={channel.id}
             channel={channel}
           />
         ))}
