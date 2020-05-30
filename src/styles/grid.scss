@@ -11,15 +11,17 @@
 .app-sidebar {
   width: 15vw;
   max-height: 100vh;
-  overflow: auto;
+  overflow-y: auto;
   flex-shrink: 0;
   min-width: 200px;
   max-width: 600px;
+  padding: 15px;
+  box-shadow: 1px 1px 5px #ccc;
 }
 
 .app-body {
   position: relative;
   flex-grow: 1;
   overflow: auto;
-  max-height: 100vh;
+  height: 100vh;
 }

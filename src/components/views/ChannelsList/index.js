@@ -6,6 +6,19 @@ import * as actions from '../../../store/actions/RssListActions';
 import ChannelItem from './ChannelItem';
 
 export class rssChannelsPage extends React.Component {
+  constructor() {
+    super();
+    this.fetchSpecificFeed = this.fetchSpecificFeed.bind(this);
+  }
+
+  fetchSpecificFeed(channelId) {
+    const { actions, rssChannels } = this.props;
+    const channelItem = rssChannels.find(ch => ch.id === parseInt(channelId, 10));
+    actions.setRssChannel(channelItem);
+    actions.setLoadingState(true);
+    actions.getRssData(channelItem.url);
+  }
+
   render() {
     return (
       <div className="channels-list">
@@ -13,10 +26,10 @@ export class rssChannelsPage extends React.Component {
           <ChannelItem
             key={channel.name}
             channel={channel}
+            fetchSpecificFeed={this.fetchSpecificFeed}
           />
         ))}
       </div>
-
     );
   }
 }
