@@ -4,7 +4,7 @@ import rssParser from 'rss-parser';
 export function setCurrentRssChannel(channel, loadingState) {
   return function (dispatch) {
     dispatch({
-      type: types.SAVE_RSS_LIST,
+      type: types.SAVE_CURRENT_CHANNEL,
       channel
     });
 
@@ -29,7 +29,7 @@ export function getRssData(url) {
         type: types.SET_NOTIFICATION,
         notification: {
           type: 'success',
-          message: `Successfully fetched ${success.title}`,
+          message: `Successfully fetched ${success.title} feed`,
         },
       });
       return success;

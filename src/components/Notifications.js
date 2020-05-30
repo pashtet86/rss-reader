@@ -30,7 +30,7 @@ class Notifications extends React.Component  {
   render() {
     const { notification } = this.props;
     return (
-      <Snackbar open={this.state.opened } autoHideDuration={2000} onClose={this.handleClose}>
+      <Snackbar open={ this.state.opened } autoHideDuration={3000} onClose={this.handleClose}>
         <Alert severity={notification.type}>
           {notification.message}
         </Alert>
