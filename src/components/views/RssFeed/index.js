@@ -21,7 +21,7 @@ export class rssFeed extends React.Component  {
 
   render() {
     const { isFetching, selectedChannel, channelData } = this.props;
-    const feedTitleText = channelData.items.length ? channelData.title : 'Please select a RSS channel to load feed';
+    const feedTitleText = channelData.items.length ? channelData.title : 'Select RSS channel';
 
     return (
       <div className="feed-section">
