@@ -1,4 +1,4 @@
-Simple RSS reader application
+# Simple RSS reader application
 
 
 ## Technologies
