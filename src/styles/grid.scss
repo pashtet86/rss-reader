@@ -36,13 +36,6 @@ $gutter: 15px;
   }
 }
 
-.feed-section {
-  overflow: auto;
-  height: 100vh;
-  transition: width .2s;
-  width: 60%;
-}
-
 .message-details {
   overflow: auto;
   height: calc(100vh - 25px);
