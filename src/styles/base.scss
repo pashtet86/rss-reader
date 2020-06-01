@@ -26,14 +26,32 @@ h2 {
 }
 
 .MuiPaper-root {
-  margin-right: .5vw;
+  width: 100%;
   margin-bottom: .5vw;
+
+  &:hover {
+    .MuiCardMedia-root {
+      transform: scale(1.05);
+    }
+
+    .MuiCardContent-root {
+      font-weight: bold;
+    }
+  }
 }
 
 .MuiCardMedia-root {
-  width: 300px;
-  height: 150px;
+  width: 100%;
+  height: 85px;
   max-width: 100%;
+  transition: transform .2s;
+  background-size: contain !important;
+  margin-top: 10px;
+}
+
+.MuiCardContent-root {
+  font-size: 14px;
+  text-align: center;
 }
 
 .loading-progress {

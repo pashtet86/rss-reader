@@ -8,14 +8,16 @@ export default {
   rssChannels:{
     isFetching: true,
     selectedChannel: null,
+    currentFeedItem: {},
     channelData: {
       items: [],
     },
+    // mocked data ❗️
     list: [{
       id: 1,
-      name: 'Reddit',
-      image: 'reddit.jpg',
-      url: 'https://www.reddit.com/.rss'
+      name: 'React',
+      image: 'react.png',
+      url: 'https://reactjs.org/feed.xml '
     },
     {
       id: 2,
@@ -26,14 +28,8 @@ export default {
     {
       id: 3,
       name: 'DEV',
-      image: 'sof.jpg',
+      image: 'dev.png',
       url: 'dev.to/feed/',
-    },
-    {
-      id: 4,
-      name: 'CSS Weekly',
-      image: 'css.png',
-      url: 'https://css-weekly.com/feed/',
     }],
   }
 };

@@ -1,5 +1,6 @@
 import ChannelsList from "./views/ChannelsList/";
-import RssFeed from "./views/RssFeed";
+import RssFeed from "./views/rssFeed";
+import Message from "./views/Message";
 import Notifications from "./Notifications";
 import PropTypes from "prop-types";
 import React from "react";
@@ -9,7 +10,7 @@ import {connect} from 'react-redux';
 class App extends React.Component {
 
   render() {
-    const { channelData, isFetching } = this.props;
+    const { channelData, isFetching, selectedChannel, feedItem } = this.props;
     return (
       <div className="app-wrapper">
 
@@ -17,11 +18,15 @@ class App extends React.Component {
           <ChannelsList />
         </aside>
 
-        <div className="app-body">
+        <div className={`app-body ${feedItem.title ? 'collapsed' : ''}`}>
           <RssFeed
             channelData={channelData}
             isFetching={isFetching}
+            selectedChannel={selectedChannel}
           />
+
+          <Message feedItem={feedItem} />
+
         </div>
 
         <Notifications />
@@ -34,6 +39,8 @@ class App extends React.Component {
 App.propTypes = {
   children: PropTypes.element,
   channelData: PropTypes.object,
+  selectedChannel: PropTypes.object,
+  feedItem: PropTypes.object,
   isFetching: PropTypes.bool
 };
 
@@ -42,6 +49,8 @@ function mapStateToProps(state) {
   return {
     channelData: state.rssChannels.channelData,
     isFetching: state.rssChannels.isFetching,
+    selectedChannel: state.rssChannels.selectedChannel,
+    feedItem: state.rssChannels.currentFeedItem,
   };
 }
 

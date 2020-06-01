@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import rssParser from 'rss-parser';
 
+
 export function setCurrentRssChannel(channel, loadingState) {
   return function (dispatch) {
     dispatch({
@@ -58,3 +59,11 @@ export function getRssData(url) {
 
 }
 
+export function setCurrentFeedItem(feedItem) {
+  return function (dispatch) {
+    return dispatch({
+      type: types.SAVE_CURRENT_MESSAGE,
+      feedItem
+    });
+  };
+}

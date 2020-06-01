@@ -1,46 +1,81 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, ListItem, Chip } from '@material-ui/core';
-import ListItemText from '@material-ui/core/ListItemText';
+import { List } from '@material-ui/core';
+import ListItem from './ListItem';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../../store/actions/RssListActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const rssFeed = ({ isFetching, channelData }) => {
+export class rssFeed extends React.Component  {
 
-  return (
-    <div>
-      {isFetching &&
-        <div className="loading-progress">
-          <CircularProgress
-            size={80}
-            variant="indeterminate"
-          />
-        </div>
-      }
-      <List>
-        {channelData.items.map(({link, title, pubDate, author}, index) => (
-          <div key={ index }>
-            <ListItem component="a" button divider target="_blank" href={link} alignItems="flex-start" >
+  constructor() {
+    super();
+    this.openMessage = this.openMessage.bind(this);
+  }
 
-              <ListItemText
-                primary={title}
-                secondary={pubDate}
-              />
-              <Chip label={author} />
+  openMessage(content) {
+    const { actions } = this.props;
+    actions.setCurrentFeedItem(content);
+  }
 
-            </ListItem>
+  render() {
+    const { isFetching, selectedChannel, channelData } = this.props;
+    const feedTitleText = channelData.items.length ? channelData.title : 'Please select a RSS channel to load feed';
 
+    return (
+      <div className="feed-section">
+        {isFetching && selectedChannel &&
+          <div className="loading-progress">
+            <CircularProgress
+              size={80}
+              variant="indeterminate"
+            />
           </div>
-        ))}
-      </List>
+        }
 
-    </div>
-  );
+        <div className="feed-section__info">
+          {feedTitleText}
+        </div>
+
+        <List>
+          {channelData.items.map((item, index) => (
+            <div key={ index }>
+              <ListItem
+                item={item}
+                openMessage={this.openMessage}
+              />
+            </div>
+          ))}
+        </List>
+
+      </div>
+    );
+  }
 }
 
 rssFeed.propTypes = {
+  actions: PropTypes.object.isRequired,
   channelData: PropTypes.object,
-  isFetching: PropTypes.bool
+  selectedChannel: PropTypes.object,
+  isFetching: PropTypes.bool,
+  opennFeedItem: PropTypes.func
 };
 
-export default rssFeed;
+function mapStateToProps(state) {
+  return {
+    rssChannels: state.rssChannels.list
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(rssFeed);
 

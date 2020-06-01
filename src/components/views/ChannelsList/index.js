@@ -16,6 +16,8 @@ export class rssChannelsPage extends React.Component {
     const channelItem = rssChannels.find(ch => ch.id === parseInt(channelId, 10));
     actions.setCurrentRssChannel(channelItem, true);
     actions.getRssData(channelItem.url);
+    // clear feedItem
+    actions.setCurrentFeedItem({});
   }
 
   render() {

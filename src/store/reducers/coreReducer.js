@@ -7,8 +7,6 @@ export default function coreReducer(state = initialState.core, action) {
 
   switch (action.type) {
     case SET_NOTIFICATION:
-      // console.log(action);
-
        newState = objectAssign({}, state);
        newState.notification = action.notification;
        return newState;

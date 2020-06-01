@@ -14,6 +14,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
   return (
     <Card onClick={handleChannelClick} classes={{ root: 'my-class-name' }}>
       <CardActionArea>
+        {/* TODO: refactor this -> public folder is NOT good solution */}
         <CardMedia
           component="div"
           image={
