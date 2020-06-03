@@ -5,11 +5,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
- const ChannelItem = ({channel, fetchSpecificFeed}) => {
+  const ChannelItem = ({channel, fetchSpecificFeed}) => {
 
   const handleChannelClick = () => {
     fetchSpecificFeed(channel.id);
   }
+
+  const imgUrl = channel.image || 'default-channel-img.png';
 
   return (
     <Card onClick={handleChannelClick} classes={{ root: 'my-class-name' }}>
@@ -18,7 +20,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
         <CardMedia
           component="div"
           image={
-            require(`public/images/${channel.image}`)
+            require(`public/images/${imgUrl}`)
           }
           title="Contemplative Reptile"
         />

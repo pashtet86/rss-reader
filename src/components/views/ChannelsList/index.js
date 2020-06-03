@@ -4,11 +4,16 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../store/actions/RssListActions';
 import ChannelItem from './ChannelItem';
+import ChannelsListAddForm from './ChannelsListAddForm';
 
-export class rssChannelsPage extends React.Component {
+export class ChannelsList extends React.Component {
   constructor() {
     super();
+    this.state = { channel: '' };
+
     this.fetchSpecificFeed = this.fetchSpecificFeed.bind(this);
+    // this.handleChangeInput = this.handleChangeInput.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   fetchSpecificFeed(channelId) {
@@ -18,11 +23,22 @@ export class rssChannelsPage extends React.Component {
     actions.getRssData(channelItem.url);
     // clear feedItem
     actions.setCurrentFeedItem({});
+
   }
+
+  // handleChangeInput(event) {
+  //   this.setState({ channel: event.target.value });
+  // }
+
+  // handleSubmit(event) {
+  //   alert('канал: ' + this.state.channel);
+  //   event.preventDefault();
+  // }
 
   render() {
     return (
       <div className="channels-list">
+        <ChannelsListAddForm />
         {this.props.rssChannels.map((channel) => (
           <ChannelItem
             key={channel.name}
@@ -35,7 +51,7 @@ export class rssChannelsPage extends React.Component {
   }
 }
 
-rssChannelsPage.propTypes = {
+ChannelsList.propTypes = {
   actions: PropTypes.object.isRequired,
   rssChannels: PropTypes.array.isRequired
 };
@@ -55,5 +71,5 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(rssChannelsPage);
+)(ChannelsList);
 

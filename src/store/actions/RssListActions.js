@@ -2,6 +2,15 @@ import * as types from './actionTypes';
 import rssParser from 'rss-parser';
 
 
+export function addChannel(channel) {
+  return function (dispatch) {
+    dispatch({
+      type: types.ADD_CHANNEL,
+      channel
+    });
+  };
+}
+
 export function setCurrentRssChannel(channel, loadingState) {
   return function (dispatch) {
     dispatch({
@@ -37,6 +46,7 @@ export function getRssData(url) {
     }
 
     function onError(error) {
+      console.log(error);
       dispatch({
         type: types.SET_NOTIFICATION,
         notification: {
@@ -44,7 +54,7 @@ export function getRssData(url) {
           message: 'Unable to fetch RSS feed',
         },
       });
-      return error;
+      return false;
     }
 
     try {
