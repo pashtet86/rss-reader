@@ -4,8 +4,18 @@
 
 .page-view {
   position: absolute;
-  // left: 15px;
-  // right: 15px;
+}
+
+.app {
+  margin: 0 auto;
+  overflow: hidden;
+  width: 700px;
+  height: 800px;
+}
+
+.centered-image {
+  display: block;
+  margin: 0 auto;
 }
 
 .fade-enter {
@@ -29,3 +39,32 @@
   transform: scale(0.95);
   transition: opacity .2s, transform .1s;
 }
+
+.feed-item {
+  position: absolute;
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.slide-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity .2s, transform .1s;
+  transition-delay: .2s;
+}
+
+.slide-exit {
+  opacity: 0;
+  transform: translateX();
+}
+
+.slide-exit-active {
+  opacity: 1;
+  transform: translateX(-100%);
+  transition: opacity .2s, transform .1s;
+}
+
+

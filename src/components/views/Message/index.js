@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Icon from '@material-ui/core/Icon';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const Message = ({ feedItem }) => {
 
@@ -12,10 +13,17 @@ const Message = ({ feedItem }) => {
         <Chip icon={<Icon>face</Icon>} label={feedItem.creator} />
       </div>
       {feedItem.content && (
-        <div
-          className="parsed-content"
-          dangerouslySetInnerHTML={{ __html: feedItem.content }}
-        />
+        <TransitionGroup>
+          <CSSTransition key={feedItem.title} timeout={1000} classNames="slide">
+            <div className="feed-item">
+              <h1>{feedItem.title || ''}</h1>
+              <div
+                className="parsed-content"
+                dangerouslySetInnerHTML={{ __html: feedItem.content }}
+              />
+            </div>
+          </CSSTransition>
+        </TransitionGroup>
       )}
       {!feedItem.content && (
         <div>

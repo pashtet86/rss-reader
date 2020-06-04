@@ -35,6 +35,12 @@ $gutter: 15px;
   display: flex;
   justify-content: flex-start;
   align-items: stretch;
+  width: 85vw;
+
+  h1 {
+    line-height: 1.3;
+  }
+
 
   &.collapsed {
     .feed-section {
@@ -45,6 +51,7 @@ $gutter: 15px;
 }
 
 .message-details {
+  position: relative;
   overflow: auto;
   height: calc(100vh - 25px);
   width: 60%;
