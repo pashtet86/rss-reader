@@ -1,15 +1,10 @@
 import { SET_NOTIFICATION } from '../actions/actionTypes';
-import objectAssign from 'object-assign';
 import initialState from '../initialState';
 
 export default function coreReducer(state = initialState.core, action) {
-  let newState;
-
   switch (action.type) {
     case SET_NOTIFICATION:
-       newState = objectAssign({}, state);
-       newState.notification = action.notification;
-       return newState;
+       return { ...state, notification: action.notification };
 
     default:
       return state;

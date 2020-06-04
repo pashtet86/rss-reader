@@ -9,11 +9,9 @@ import ChannelsListAddForm from './ChannelsListAddForm';
 export class ChannelsList extends React.Component {
   constructor() {
     super();
-    this.state = { channel: '' };
+    // this.state = { channel: '' };
 
     this.fetchSpecificFeed = this.fetchSpecificFeed.bind(this);
-    // this.handleChangeInput = this.handleChangeInput.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   fetchSpecificFeed(channelId) {
@@ -26,19 +24,10 @@ export class ChannelsList extends React.Component {
 
   }
 
-  // handleChangeInput(event) {
-  //   this.setState({ channel: event.target.value });
-  // }
-
-  // handleSubmit(event) {
-  //   alert('канал: ' + this.state.channel);
-  //   event.preventDefault();
-  // }
-
   render() {
     return (
       <div className="channels-list">
-        <ChannelsListAddForm />
+        <ChannelsListAddForm actions={this.props.actions} />
         {this.props.rssChannels.map((channel) => (
           <ChannelItem
             key={channel.name}

@@ -1,39 +1,30 @@
 import { SAVE_CURRENT_CHANNEL, SET_RSS_DATA, TOGGLE_LOADING_STATE, ADD_CHANNEL, SAVE_CURRENT_MESSAGE } from '../actions/actionTypes';
-import objectAssign from 'object-assign';
 import initialState from '../initialState';
 
 export default function rssListReducer(state = initialState.rssChannels, action) {
-  let newState;
-  let newChannelsList;
 
   switch (action.type) {
     case ADD_CHANNEL:
-      newState = objectAssign({}, state);
-      newChannelsList = state.list.slice();
-      newChannelsList.push(action.channel);
-      newState.list = newChannelsList;
-      return newState;
+      return {
+        ...state,
+        list: [action.channel, ...state.list],
+      };
 
     case TOGGLE_LOADING_STATE:
-      newState = objectAssign({}, state);
-      newState.isFetching = action.isFetching;
-      return newState;
+      return { ...state, isFetching: action.isFetching };
 
     case SAVE_CURRENT_CHANNEL:
-      newState = objectAssign({}, state);
-      newState.selectedChannel = action.channel;
-      return newState;
+      return { ...state, selectedChannel : action.channel};
 
     case SAVE_CURRENT_MESSAGE:
-      newState = objectAssign({}, state);
-      newState.currentFeedItem = action.feedItem;
-      return newState;
+      return { ...state, currentFeedItem: action.feedItem };
 
     case SET_RSS_DATA:
-      newState = objectAssign({}, state);
-      newState.channelData = action.payload;
-      newState.isFetching = action.isFetching;
-      return newState;
+      return {
+        ...state,
+        channelData: action.payload,
+        isFetching: action.isFetching,
+      };
 
     default:
       return state;

@@ -21,6 +21,13 @@ $gutter: 15px;
   box-shadow: 1px 1px 5px #ccc;
 }
 
+.add-new-channel-form {
+  &__btn {
+    margin-bottom: 15px !important;
+    width: 100%;
+  }
+}
+
 .app-body {
   position: relative;
   flex-grow: 1;
