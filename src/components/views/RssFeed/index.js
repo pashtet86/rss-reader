@@ -20,35 +20,34 @@ export class rssFeed extends React.Component  {
   }
 
   render() {
-    const { isFetching, selectedChannel, channelData } = this.props;
+    const {
+      isFetching,
+      selectedChannel,
+      channelData,
+      showStatistics,
+    } = this.props;
     const feedTitleText = channelData.items.length ? channelData.title : 'Select RSS channel';
 
     return (
-      <div className="feed-section">
-        {isFetching && selectedChannel &&
-          <div className="loading-progress">
-            <CircularProgress
-              size={80}
-              variant="indeterminate"
-            />
+      <div
+        className={`feed-section ${showStatistics ? 'show-statistic' : ''}`}
+      >
+        {isFetching && selectedChannel && (
+          <div className="loading-overlay">
+            <CircularProgress size={80} variant="indeterminate" />
           </div>
-        }
-
-        <div className="feed-section__info">
-          {feedTitleText}
-        </div>
-
+        )}
+        <div className="feed-section__info">{feedTitleText}</div>
         <List>
           {channelData.items.map((item, index) => (
-            <div key={ index }>
-              <ListItem
-                item={item}
-                openMessage={this.openMessage}
-              />
+            <div key={index}>
+              <ListItem item={item} openMessage={this.openMessage} />
             </div>
           ))}
         </List>
-
+        <div className="feed-section__footer">
+          Messages: {channelData.items.length}
+        </div>
       </div>
     );
   }
@@ -59,12 +58,14 @@ rssFeed.propTypes = {
   channelData: PropTypes.object,
   selectedChannel: PropTypes.object,
   isFetching: PropTypes.bool,
-  opennFeedItem: PropTypes.func
+  showStatistics: PropTypes.bool,
+  opennFeedItem: PropTypes.func,
 };
 
 function mapStateToProps(state) {
   return {
-    rssChannels: state.rssChannels.list
+    rssChannels: state.rssChannels.list,
+    showStatistics: state.core.showStatistics
   };
 }
 

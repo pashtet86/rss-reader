@@ -67,7 +67,7 @@ const ChannelsListAddForm = ({actions, isFetching}) => {
         onClose={handleClose}
       >
         {isFetching &&
-          <div className="loading-progress">
+          <div className="loading-overlay">
             <CircularProgress
               size={80}
               variant="indeterminate"

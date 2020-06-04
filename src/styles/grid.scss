@@ -11,6 +11,7 @@ $gutter: 15px;
 }
 
 .app-sidebar {
+  position: relative;
   width: 15vw;
   height: calc(100vh - #{$gutter * 2});
   overflow-y: auto;
@@ -75,5 +76,35 @@ $gutter: 15px;
     * {
       max-width: 90%;
     }
+  }
+}
+
+ .statistics-switcher {
+    border-bottom: 1px solid #ccc;
+    padding: 5px 15px;
+    margin: -15px;
+    margin-bottom: 15px;
+  }
+
+.channels-list {
+
+  &.show-statistic {
+    padding-bottom: 40px;
+
+    .channels-list__footer {
+      transform: translateY(0);
+    }
+  }
+
+  &__footer {
+    background: #eaeaea;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    line-height: 30px;
+    padding: 5px 15px;
+    transition: transform .2s;;
+    transform: translateY(110%);
   }
 }

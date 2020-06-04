@@ -1,30 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
+import Icon from '@material-ui/core/Icon';
 
 const Message = ({ feedItem }) => {
 
   return (
     <div className={`message-details ${feedItem.title ? '' : 'no-data'}`}>
-      {feedItem.content &&
-        <div className="parsed-content" dangerouslySetInnerHTML={{ __html: feedItem.content }} />
-      }
-      {!feedItem.content &&
+      <div className="message-details__header">
+        <Chip icon={<Icon>face</Icon>} label={feedItem.creator} />
+      </div>
+      {feedItem.content && (
+        <div
+          className="parsed-content"
+          dangerouslySetInnerHTML={{ __html: feedItem.content }}
+        />
+      )}
+      {!feedItem.content && (
         <div>
-        Content not found for <strong>{feedItem.title}</strong>
-        <br/>
-        <br/>
+          Content not found for <strong>{feedItem.title}</strong>
+          <br />
+          <br />
           <Button
             variant="contained"
             color="primary"
             href={feedItem.link}
             target="_blank"
             rel="noopener noreferrer"
-          >Open by link</Button>
-
+          >
+            Open by link
+          </Button>
         </div>
-      }
-
+      )}
     </div>
   );
 }

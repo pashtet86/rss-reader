@@ -9,4 +9,12 @@ export function setNotification(notification) {
   };
 }
 
+export function toggleStatistics() {
+  return function (dispatch) {
+    return dispatch({
+      type: types.TOGGLE_STATISTICS,
+    });
+  };
+}
+
 
