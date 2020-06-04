@@ -36,6 +36,7 @@
     "@material-ui/lab": "4.0.0-alpha.54",
     "connected-react-router": "6.5.2",
     "html-react-parser": "0.10.5",
+    "lodash.throttle": "4.1.1",
     "moment": "2.26.0",
     "object-assign": "4.1.1",
     "react": "16.11.0",

@@ -5,6 +5,8 @@ import { createBrowserHistory } from "history";
 // 'routerMiddleware': the new way of storing route changes with redux middleware since rrV4.
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import createRootReducer from './reducers';
+import throttle from 'lodash.throttle';
+import { saveState, loadState } from './localStorage';
 
 export const history = createBrowserHistory();
 const connectRouterHistory = connectRouter(history);
@@ -42,10 +44,18 @@ function configureStoreDev(initialState) {
   ];
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
+
+  const persistedState = loadState();
   const store = createStore(
     createRootReducer(history), // root reducer with router state
-    initialState,
+    {...initialState, ...persistedState},
     composeEnhancers(applyMiddleware(...middlewares))
+  );
+
+  store.subscribe(
+    throttle(() => {
+      saveState(store.getState());
+    }, 1000)
   );
 
   if (module.hot) {
