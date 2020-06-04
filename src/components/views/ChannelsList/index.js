@@ -9,29 +9,31 @@ import ChannelsListAddForm from './ChannelsListAddForm';
 export class ChannelsList extends React.Component {
   constructor() {
     super();
-    // this.state = { channel: '' };
-
     this.fetchSpecificFeed = this.fetchSpecificFeed.bind(this);
   }
 
   fetchSpecificFeed(channelId) {
     const { actions, rssChannels } = this.props;
+    actions.setCurrentRssChannel(channelId);
     const channelItem = rssChannels.find(ch => ch.id === parseInt(channelId, 10));
-    actions.setCurrentRssChannel(channelItem, true);
     actions.getRssData(channelItem.url);
     // clear feedItem
     actions.setCurrentFeedItem({});
-
   }
 
   render() {
+    const { rssChannels, isFetching, actions, selectedChannel } = this.props;
     return (
       <div className="channels-list">
-        <ChannelsListAddForm actions={this.props.actions} />
-        {this.props.rssChannels.map((channel) => (
+        <ChannelsListAddForm
+          actions={actions}
+          isFetching={isFetching}
+        />
+        {rssChannels.map((channel) => (
           <ChannelItem
             key={channel.name}
             channel={channel}
+            selectedChannel={selectedChannel}
             fetchSpecificFeed={this.fetchSpecificFeed}
           />
         ))}
@@ -42,12 +44,16 @@ export class ChannelsList extends React.Component {
 
 ChannelsList.propTypes = {
   actions: PropTypes.object.isRequired,
-  rssChannels: PropTypes.array.isRequired
+  selectedChannel: PropTypes.object.isRequired,
+  rssChannels: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    rssChannels: state.rssChannels.list
+    rssChannels: state.rssChannels.list,
+    isFetching: state.rssChannels.isFetching,
+    selectedChannel: state.rssChannels.selectedChannel
   };
 }
 

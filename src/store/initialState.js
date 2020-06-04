@@ -6,13 +6,15 @@ export default {
     },
   },
   rssChannels:{
-    isFetching: true,
-    selectedChannel: null,
+    isFetching: false,
+    selectedChannel: {
+      id: null
+    },
     currentFeedItem: {},
     channelData: {
       items: [],
     },
-    // mocked data ❗️
+    // mocked channels ❗️
     list: [{
       id: 1,
       name: 'React',

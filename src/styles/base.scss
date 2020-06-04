@@ -28,6 +28,11 @@ h2 {
 .MuiPaper-root {
   width: 100%;
   margin-bottom: .5vw;
+  border: 1px solid #eaeaea;
+
+  &.active-channel {
+    box-shadow: inset 1px 1px 3px #ccc;
+  }
 
   &:hover {
     .MuiCardMedia-root {
@@ -38,6 +43,11 @@ h2 {
       font-weight: bold;
     }
   }
+}
+
+.MuiPaper-root.active-channel  .MuiCardActionArea-focusHighlight,
+.MuiCardActionArea-root:hover .MuiCardActionArea-focusHighlight {
+  opacity: 0.1 !important;
 }
 
 .MuiCardMedia-root {

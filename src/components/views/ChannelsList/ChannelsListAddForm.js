@@ -7,8 +7,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const ChannelsListAddForm = ({actions}) => {
+const ChannelsListAddForm = ({actions, isFetching}) => {
 
   const DEFAULT_URL = 'https://css-tricks.com/feed/';
   const [channelUrl, setChannelUrl] = React.useState(DEFAULT_URL);
@@ -27,23 +28,29 @@ const ChannelsListAddForm = ({actions}) => {
     setChannelUrl('');
   };
 
+  const createChannelObject = (feedUrl, title) => {
+    return {
+      id: Math.floor(Math.random() * 1000),
+      url: feedUrl,
+      image: '',
+      name: title,
+      // description:
+    };
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const channelInfo = await actions.getRssData(channelUrl);
 
     if (channelInfo) {  // TODO: refactor this
-      const newChannel = {
-        id: Math.floor(Math.random() * 100),
-        url: channelInfo.feedUrl,
-        image: '',
-        name: channelInfo.title,
-        // description:
-      }
+      const { feedUrl, title } = channelInfo;
+      const newChannel = createChannelObject(feedUrl, title);
+
       actions.addChannel(newChannel); // TODO: use parent's method
+      actions.setCurrentRssChannel(newChannel.id);
       setOpen(false);
       setChannelUrl('');
     }
-
   }
 
   return (
@@ -59,6 +66,14 @@ const ChannelsListAddForm = ({actions}) => {
         open={open}
         onClose={handleClose}
       >
+        {isFetching &&
+          <div className="loading-progress">
+            <CircularProgress
+              size={80}
+              variant="indeterminate"
+            />
+          </div>
+        }
         <DialogTitle id="alert-dialog-title">{"Enter new RSS channel url"}</DialogTitle>
         <DialogContent>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
@@ -91,6 +106,7 @@ const ChannelsListAddForm = ({actions}) => {
 
 ChannelsListAddForm.propTypes = {
   actions: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
 
 export default ChannelsListAddForm;

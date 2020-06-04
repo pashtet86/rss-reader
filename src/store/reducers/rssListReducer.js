@@ -14,7 +14,12 @@ export default function rssListReducer(state = initialState.rssChannels, action)
       return { ...state, isFetching: action.isFetching };
 
     case SAVE_CURRENT_CHANNEL:
-      return { ...state, selectedChannel : action.channel};
+      return {
+        ...state,
+        selectedChannel: state.list.find(
+          (ch) => ch.id === parseInt(action.channel, 10)
+        ),
+      };
 
     case SAVE_CURRENT_MESSAGE:
       return { ...state, currentFeedItem: action.feedItem };
