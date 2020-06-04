@@ -54,7 +54,16 @@ function configureStoreDev(initialState) {
 
   store.subscribe(
     throttle(() => {
-      saveState(store.getState());
+      saveState({
+        // save channles object module but cut massive feed item TODO: PERFORMANCE! -> refactor this
+        rssChannels: {
+          ...store.getState().rssChannels,
+          currentFeedItem: {},
+          channelData: {
+            items: [],
+          },
+        },
+      });
     }, 1000)
   );
 
