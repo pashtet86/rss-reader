@@ -3,7 +3,6 @@ import { object } from 'prop-types';
 import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import { Alert } from '@material-ui/lab';
-
 class Notifications extends React.Component  {
 
   constructor(props) {
