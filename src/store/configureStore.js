@@ -22,11 +22,30 @@ function configureStoreProd(initialState) {
     reactRouterMiddleware,
   ];
 
-  return createStore(
+  const persistedState = loadState();
+
+  const store =  createStore(
     createRootReducer(history), // root reducer with router state
-    initialState,
+    {...initialState, ...persistedState},
     compose(applyMiddleware(...middlewares))
   );
+
+  store.subscribe(
+    throttle(() => {
+      saveState({
+        // save channles object module but cut massive feed item TODO: PERFORMANCE! -> refactor this
+        rssChannels: {
+          ...store.getState().rssChannels,
+          currentFeedItem: {},
+          channelData: {
+            items: [],
+          },
+        },
+      });
+    }, 1000)
+  );
+
+  return store;
 }
 
 function configureStoreDev(initialState) {

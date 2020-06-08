@@ -39,6 +39,7 @@ const ChannelsListAddForm = ({actions, isFetching}) => {
   }
 
   const handleSubmit = async (event) => {
+    // TODO: need add validation, check for already added channel
     event.preventDefault();
     const channelInfo = await actions.getRssData(channelUrl);
 
