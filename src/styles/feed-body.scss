@@ -40,7 +40,15 @@
     line-height: 30px;
     padding: 5px 15px;
     border-left: 1px solid #ccc;
-    transition: transform .2s;;
+    transition: transform .2s;
     transform: translateY(110%);
   }
+}
+
+.letters-statistic {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: #fff;
+  z-index: 10;
 }
