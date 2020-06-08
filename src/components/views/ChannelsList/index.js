@@ -9,7 +9,7 @@ import ChannelsListAddForm from './ChannelsListAddForm';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-export class ChannelsList extends React.Component {
+export class channelsList extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -73,7 +73,7 @@ export class ChannelsList extends React.Component {
   }
 }
 
-ChannelsList.propTypes = {
+channelsList.propTypes = {
   actions: PropTypes.object.isRequired,
   coreActions: PropTypes.object.isRequired,
   selectedChannel: PropTypes.object.isRequired,
@@ -101,5 +101,5 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ChannelsList);
+)(channelsList);
 

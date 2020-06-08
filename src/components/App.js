@@ -1,5 +1,5 @@
 import ChannelsList from "./views/ChannelsList/";
-import RssFeed from "./views/rssFeed";
+import RssFeed from "./views/RssFeed";
 import Message from "./views/Message";
 import Notifications from "./Notifications";
 import PropTypes from "prop-types";
