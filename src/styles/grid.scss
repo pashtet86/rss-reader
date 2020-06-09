@@ -115,3 +115,15 @@ $gutter: 15px;
     transform: translateY(110%);
   }
 }
+
+.MuiCard-root {
+  position: relative;
+
+  .remove-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+}
+
+

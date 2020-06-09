@@ -16,6 +16,7 @@ export class channelsList extends React.Component {
       showStatistics: false,
     };
     this.fetchSpecificFeed = this.fetchSpecificFeed.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
 
   handleChange = () => {
@@ -29,6 +30,11 @@ export class channelsList extends React.Component {
     actions.getRssData(channelItem.url);
     // clear feedItem
     actions.setCurrentFeedItem({});
+  }
+
+  removeItem(channelId) {
+    const { actions } = this.props;
+    actions.removeChannel(channelId);
   }
 
   render() {
@@ -66,6 +72,7 @@ export class channelsList extends React.Component {
               channel={channel}
               selectedChannel={selectedChannel}
               fetchSpecificFeed={this.fetchSpecificFeed}
+              removeItem={this.removeItem}
             />
           ))}
           <div className="channels-list__footer">

@@ -1,9 +1,15 @@
-import { SAVE_CURRENT_CHANNEL, SET_RSS_DATA, TOGGLE_LOADING_STATE, ADD_CHANNEL, SAVE_CURRENT_MESSAGE } from '../actions/actionTypes';
+import { SAVE_CURRENT_CHANNEL, SET_RSS_DATA, TOGGLE_LOADING_STATE, ADD_CHANNEL, REMOVE_CHANNEL, SAVE_CURRENT_MESSAGE } from '../actions/actionTypes';
 import initialState from '../initialState';
 
 export default function rssListReducer(state = initialState.rssChannels, action) {
 
   switch (action.type) {
+    case REMOVE_CHANNEL:
+      return {
+        ...state,
+        list: state.list.filter((ch) => ch.id !== action.channel)
+      };
+
     case ADD_CHANNEL:
       return {
         ...state,

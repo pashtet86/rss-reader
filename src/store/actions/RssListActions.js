@@ -19,6 +19,15 @@ export function addChannel(channel) {
   };
 }
 
+export function removeChannel(channel) {
+  return function (dispatch) {
+    dispatch({
+      type: types.REMOVE_CHANNEL,
+      channel
+    });
+  };
+}
+
 export function setCurrentRssChannel(channel) {
   return function (dispatch) {
     dispatch({
