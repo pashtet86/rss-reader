@@ -55,7 +55,11 @@ export class channelsList extends React.Component {
           />
         </div>
         <div className={`channels-list ${showStatistics ? 'show-statistic' : ''}`}>
-          <ChannelsListAddForm actions={actions} isFetching={isFetching} />
+          <ChannelsListAddForm
+            actions={actions}
+            isFetching={isFetching}
+            rssChannels={rssChannels}
+          />
           {rssChannels.map((channel) => (
             <ChannelItem
               key={channel.name}

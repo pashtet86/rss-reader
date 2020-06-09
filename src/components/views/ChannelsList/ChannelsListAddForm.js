@@ -9,14 +9,16 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const ChannelsListAddForm = ({actions, isFetching}) => {
+const ChannelsListAddForm = ({actions, isFetching, rssChannels}) => {
 
   const DEFAULT_URL = 'https://css-tricks.com/feed/';
   const [channelUrl, setChannelUrl] = React.useState(DEFAULT_URL);
   const [open, setOpen] = React.useState(false);
+  const [invalid, setInvalid] = React.useState(false);
 
   const handleChangeInput = (event) => {
     setChannelUrl(event.target.value);
+    setInvalid(false);
   }
 
   const handleClickOpen = () => {
@@ -26,6 +28,7 @@ const ChannelsListAddForm = ({actions, isFetching}) => {
   const handleClose = () => {
     setOpen(false);
     setChannelUrl('');
+    setInvalid(false);
   };
 
   const createChannelObject = (feedUrl, title) => {
@@ -38,8 +41,16 @@ const ChannelsListAddForm = ({actions, isFetching}) => {
     };
   }
 
+  const checkExistingChanne = (url) => {
+    const result = rssChannels.filter(c => c.url === url).length > 0;
+    setInvalid(result);
+    return result;
+
+  }
+
   const handleSubmit = async (event) => {
-    // TODO: need add validation, check for already added channel
+    const invalid = checkExistingChanne(channelUrl);
+    if (invalid) return false;
     event.preventDefault();
     const channelInfo = await actions.getRssData(channelUrl);
 
@@ -80,6 +91,8 @@ const ChannelsListAddForm = ({actions, isFetching}) => {
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
               fullWidth
+              error={invalid}
+              helperText={invalid ? "Channel already added" : false}
               label="Channel url"
               placeholder="ex: https://css-tricks.com/feed/"
               onChange={handleChangeInput}
@@ -108,6 +121,7 @@ const ChannelsListAddForm = ({actions, isFetching}) => {
 ChannelsListAddForm.propTypes = {
   actions: PropTypes.object.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  rssChannels: PropTypes.array.isRequired,
 };
 
 export default ChannelsListAddForm;
